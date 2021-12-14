@@ -1,0 +1,68 @@
+{
+    "name": "@jfdi/use-computed-state",
+    "version": "0.0.1",
+    "author": {
+        "name": "Jon Silver",
+        "email": "js@jfdi.info",
+        "url": "https://jfdi.info"
+    },
+    "module": "dist/formulationist-core.esm.js",
+    "typings": "dist/index.d.ts",
+    "files": [
+        "dist"
+    ],
+    "license": "MIT",
+    "dependencies": {
+        "@jfdi/attempt": "^1.0.4",
+        "@sindresorhus/is": "^4.2.0",
+        "date-fns": "^2.27.0",
+        "prop-types": "^15.7.2",
+        "lodash-es": "^4.17.21"
+    },
+    "peerDependencies": {
+        "react": ">=16.9",
+        "react-dom": ">=16.9"
+    },
+    "devDependencies": {
+        "@size-limit/preset-small-lib": "^5.0.4",
+        "@types/react": "^17.0.34",
+        "@types/react-dom": "^17.0.11",
+        "husky": "^7.0.2",
+        "size-limit": "^5.0.4",
+        "tsdx": "^0.14.1",
+        "tslib": "^2.3.1",
+        "typescript": "^4.4.4",
+        "rollup-plugin-sass": "^1.2.8",
+        "@babel/core": "^7.16.0",
+        "@babel/preset-react": "^7.16.0",
+        "eslint": "^7.32.0",
+        "eslint-config-react-app": "^6.0.0",
+        "eslint-config-prettier": "^8.3.0",
+        "eslint-plugin-prettier": "^4.0.0",
+        "prettier": "^2.4.1"
+    },
+    "scripts": {
+        "start": "tsdx watch --format esm --transpileOnly",
+        "build": "tsdx build --format esm --transpileOnly",
+        "build:watch": "tsdx build --format esm --transpileOnly",
+        "test": "tsdx test --passWithNoTests",
+        "lint": "tsdx lint",
+        "prepare": "tsdx build --format esm --transpileOnly",
+        "size": "size-limit",
+        "analyze": "size-limit --why"
+    },
+    "size-limit": [
+        {
+            "path": "dist/formulationist-core.esm.js",
+            "limit": "10 KB"
+        }
+    ],
+    "husky": {
+        "hooks": {
+            "pre-commit": "tsdx lint"
+        }
+    },
+    "browserslist": [
+        "last 2 years"
+    ]
+}

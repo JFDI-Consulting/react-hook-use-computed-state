@@ -1,0 +1,9 @@
+{
+    "recommendations": [
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "sibiraj-s.vscode-scss-formatter",
+        "rangav.vscode-thunder-client",
+        "pflannery.vscode-versionlens"
+    ]
+}

@@ -1,0 +1,11 @@
+Invoking: react-scripts build 
+
+Creating an optimized production build...
+Failed to compile.
+
+.\src\DateThing.js
+Cannot find module: '@jfdi/use-computed-state'. Make sure this package is installed.
+
+You can install this package by running: npm install @jfdi/use-computed-state.
+
+

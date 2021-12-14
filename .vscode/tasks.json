@@ -1,0 +1,65 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Start Component",
+            "command": "pnpm --stream start",
+            "type": "shell",
+            "options": {
+                "cwd": "${workspaceFolder}/useComputedState"
+            },
+            "isBackground": true,
+            "problemMatcher": {
+                "owner": "typescript",
+                "fileLocation": "relative",
+                "pattern": {
+                    "regexp": "Failed to compile",
+                    "file": 1,
+                    "location": 2,
+                    "severity": 3,
+                    "code": 4,
+                    "message": 5
+                },
+                "background": {
+                    "activeOnStart": true,
+                    "beginsPattern": "Compiling modules",
+                    "endsPattern": "Compiled successfully"
+                }
+            }
+        },
+        {
+            "label": "Start App",
+            "type": "shell",
+            "command": "pnpm --stream start",
+            "options": {
+                "cwd": "${workspaceFolder}/example"
+            },
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            },
+            "isBackground": true,
+            "problemMatcher": {
+                "owner": "custom",
+                "pattern": {
+                    "regexp": "^$"
+                },
+                "background": {
+                    "activeOnStart": true,
+                    "beginsPattern": "Compiling...",
+                    "endsPattern": "Compiled .*"
+                }
+            }
+        },
+        {
+            "label": "Build & Run",
+            "dependsOn": ["Start Component", "Start App"],
+            "dependsOrder": "sequence",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ]
+}
