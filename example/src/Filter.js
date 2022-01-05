@@ -55,8 +55,9 @@ const FilteredContacts = () => {
         <section>
             <h4>A simple filter box</h4>
             <p>
-                We fetch backend data into a pair of lists (complete &amp; filtered), and store the filter string in
-                state. Each time the filter changes, the list is re-filtered and the UI updates.
+                We fetch backend data into a pair of lists (complete &amp; filtered) stored in "computedState", and
+                store the filter string in state. Each time the filter changes, the list is re-filtered and the UI
+                updates.
             </p>
             <Filter
                 filter={filter}
