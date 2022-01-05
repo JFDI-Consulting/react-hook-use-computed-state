@@ -9,7 +9,6 @@
     "main": "./build/index.js",
     "dependencies": {
         "@sindresorhus/is": "^4.2.0",
-        "ky": "^0.28.7",
         "@jfdi/attempt": "^1.0.4",
         "react": "^17.0.2",
         "react-dom": "^17.0.2",

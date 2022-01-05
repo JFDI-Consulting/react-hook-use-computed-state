@@ -10,7 +10,6 @@ specifiers:
   eslint-config-prettier: ^8.3.0
   eslint-config-react-app: ^6.0.0
   eslint-plugin-prettier: ^4.0.0
-  ky: ^0.28.7
   prettier: ^2.4.1
   react: ^17.0.2
   react-dom: ^17.0.2
@@ -22,7 +21,6 @@ dependencies:
   '@jfdi/attempt': 1.0.4
   '@jfdi/use-computed-state': link:../src
   '@sindresorhus/is': 4.2.0
-  ky: 0.28.7
   react: 17.0.2
   react-dom: 17.0.2_react@17.0.2
   react-scripts: 4.0.3_f6fc7ba4c2cc094e9be1205da5de1fc0
@@ -7250,11 +7248,6 @@ packages:
   /klona/2.0.5:
     resolution: {integrity: sha512-pJiBpiXMbt7dkzXe8Ghj/u4FfXOOa98fPW+bihOJ4SjnoijweJrNThJfd3ifXpXhREjpoF2mZVH1GfS9LV3kHQ==}
     engines: {node: '>= 8'}
-    dev: false
-
-  /ky/0.28.7:
-    resolution: {integrity: sha512-a23i6qSr/ep15vdtw/zyEQIDLoUaKDg9Jf04CYl/0ns/wXNYna26zJpI+MeIFaPeDvkrjLPrKtKOiiI3IE53RQ==}
-    engines: {node: '>=12'}
     dev: false
 
   /language-subtag-registry/0.3.21:

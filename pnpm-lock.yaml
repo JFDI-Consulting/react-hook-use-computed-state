@@ -8,13 +8,11 @@ specifiers:
   '@size-limit/preset-small-lib': ^5.0.4
   '@types/react': ^17.0.34
   '@types/react-dom': ^17.0.11
-  date-fns: ^2.27.0
   eslint: ^7.32.0
   eslint-config-prettier: ^8.3.0
   eslint-config-react-app: ^6.0.0
   eslint-plugin-prettier: ^4.0.0
   husky: ^7.0.2
-  lodash-es: ^4.17.21
   prettier: ^2.4.1
   prop-types: ^15.7.2
   rollup-plugin-sass: ^1.2.8
@@ -26,8 +24,6 @@ specifiers:
 dependencies:
   '@jfdi/attempt': 1.0.4
   '@sindresorhus/is': 4.2.0
-  date-fns: 2.27.0
-  lodash-es: 4.17.21
   prop-types: 15.7.2
 
 devDependencies:
@@ -3370,11 +3366,6 @@ packages:
       whatwg-url: 7.1.0
     dev: true
 
-  /date-fns/2.27.0:
-    resolution: {integrity: sha512-sj+J0Mo2p2X1e306MHq282WS4/A8Pz/95GIFcsPNMPMZVI3EUrAdSv90al1k+p74WGLCruMXk23bfEDZa71X9Q==}
-    engines: {node: '>=0.11'}
-    dev: false
-
   /debug/2.6.9:
     resolution: {integrity: sha512-bC7ElrdJaJnPbAP+1EotYvqZsb3ecl5wi6Bfi6BJTUcNowp6cvspg0jXznRTKDjm/E7AdgFBVeAPVMNcKGsHMA==}
     dependencies:
@@ -5965,10 +5956,6 @@ packages:
     dependencies:
       p-locate: 4.1.0
     dev: true
-
-  /lodash-es/4.17.21:
-    resolution: {integrity: sha512-mKnC+QJ9pWVzv+C4/U3rRsHapFfHvQFoFB92e52xeyGMcX6/OlIl78je1u8vePzYZSkkogMPJ2yjxxsb89cxyw==}
-    dev: false
 
   /lodash.debounce/4.0.8:
     resolution: {integrity: sha1-gteb/zCmfEAF/9XiUVMArZyk168=}

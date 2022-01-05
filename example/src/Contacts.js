@@ -1,28 +1,21 @@
 import { useCallback, useEffect, useState } from "react";
-import { attemptPromise } from "@jfdi/attempt";
 import { useComputedState } from "@jfdi/use-computed-state";
-
-const getRandomPerson = async () => {
-    const [, res] = await attemptPromise(() => fetch("https://randomuser.me/api/"));
-    const [, person] = await attemptPromise(() => res.json());
-    console.log("Person:", person);
-    return person ?? {};
-};
+import { getContacts, getRandomPerson } from "./commonData";
+import is from "@sindresorhus/is";
 
 const ContactList = ({ contactData, setCurrentContact }) => (
     <aside style={{ padding: "1em", border: "1px dotted #ccc" }}>
         <h3>Click on a contact:</h3>
-        <ul style={{ listStyleType: "none", marginRight: "2em", paddingLeft: 0 }}>
+        <ul>
             {contactData.map((contact, idx) => {
                 const { id, name } = contact;
                 return (
-                    <li key={id}>
-                        <button
-                            onClick={() => setCurrentContact(idx)}
-                            style={{ border: "none", background: "none", cursor: "pointer" }}
-                        >
-                            {name}
-                        </button>
+                    <li
+                        key={id}
+                        onClick={is.function(setCurrentContact) ? () => setCurrentContact(idx) : null}
+                        style={{ cursor: "pointer" }}
+                    >
+                        {name}
                     </li>
                 );
             })}
@@ -30,11 +23,11 @@ const ContactList = ({ contactData, setCurrentContact }) => (
     </aside>
 );
 
-const ContactForm = ({ contact: { id, name } = {}, mungeContact }) => (
+const ContactForm = ({ contact: { id, name } = {}, mungeContact: renameContact }) => (
     <article style={{ minWidth: 300, padding: "1em", border: "1px dotted #ccc" }}>
         <p>ID: {id}</p>
         <p>Name: {name}</p>
-        <button onClick={mungeContact}>Munge!</button>
+        <button onClick={renameContact}>Rename!</button>
     </article>
 );
 
@@ -45,44 +38,34 @@ const Contacts = () => {
     });
 
     useEffect(() => {
-        const getContacts = async () => {
-            const [, res] = await attemptPromise(() => fetch("https://jsonplaceholder.typicode.com/users"));
-            const [, data] = await attemptPromise(() => res.json());
-            console.log("Data", data);
-            if (data) setContacts(data);
-        };
-
-        getContacts();
+        console.log("FETCH");
+        getContacts().then(data => setContacts(data));
     }, [setContacts]);
 
-    const mungeContact = useCallback(async () => {
-        console.log("MUNGED!");
+    const renameContact = useCallback(async () => {
         const { results: [person] = {} } = await getRandomPerson();
         contacts[currentContactIdx] = {
             ...contacts[currentContactIdx],
             name: person.name.first + " " + person.name.last
         };
         setContacts(contacts);
+        console.log("Renamed!", contacts[currentContactIdx]);
+        // we can also update the back-end
     }, [contacts, currentContactIdx, setContacts]);
 
-    useEffect(() => {
-        console.count(`Computed state ${JSON.stringify(contacts).slice(0, 50)}`);
-    }, [contacts]);
-
     return (
-        <section
-            style={{
-                display: "flex",
-                justifyContent: "center",
-                textAlign: "left",
-                marginTop: "4em"
-            }}
-        >
+        <section>
+            <h4>A collection of records, optimistically updated locally</h4>
+            <p>
+                A fetched list is versioned using a timestamp. Local updates can be made, updating the UI, whilst
+                asynchronchronously updating the backend through an API. Here we just change the name to a new random
+                one.
+            </p>
             <ContactList contactData={contacts} setCurrentContact={setCurrentContactIdx} />
             {currentContactIdx !== undefined && (
                 <ContactForm
                     contact={contacts[currentContactIdx]}
-                    mungeContact={() => mungeContact(currentContactIdx)}
+                    mungeContact={() => renameContact(currentContactIdx)}
                 />
             )}
         </section>

@@ -1,61 +1,45 @@
-import { useCallback, useEffect, useRef, useState } from "react";
-import useWhatChanged from "./useWhatChanged";
+import { useCallback, useRef, useState } from "react";
 import { attempt } from "@jfdi/attempt";
+import is from "@sindresorhus/is";
 
-const isFunc = x => typeof x === "function";
+const resolveInitialState = inSt => (is.nullOrUndefined(inSt) ? Date.now() : inSt);
 
-export const useComputedState = ({
-    initialState = Date.now(),
-    initialComputedState,
-    computeFn,
-    beforeChange,
-    afterChange
-}) => {
-    const [state, setState] = useState(initialState);
+export const useComputedState = ({ initialState, initialComputedState, computeFn, debug = false }) => {
+    const timestampMode = useRef(is.nullOrUndefined(initialState));
+    const [simpleState, setSimpleState] = useState(resolveInitialState(initialState));
     const computedState = useRef(initialComputedState);
+    const log = useCallback((...args) => debug && console.log(...args), [debug]);
 
-    useEffect(() => {
-        if (isFunc(computeFn)) {
-            const [e, res] = attempt(() => computeFn(state, computedState.current));
-
-            if (!e) computedState.current = res;
-        }
-    }, [state, computeFn]);
-
-    const callBeforeChange = useCallback(
-        (prevState, prevComputedState) => isFunc(beforeChange) && beforeChange(prevState, prevComputedState),
-        [beforeChange]
-    );
-
-    const callAfterChange = useCallback(
-        (newState, newComputedState) => isFunc(afterChange) && afterChange(newState, newComputedState),
-        [afterChange]
+    const setState = useCallback(
+        newState => {
+            log("setState:", { newState });
+            setSimpleState(newState);
+            if (is.function(computeFn)) {
+                const [e, res] = attempt(() => computeFn(newState, computedState.current));
+                log("computedState:", { e, res });
+                if (e) console.error(e);
+                else computedState.current = res;
+            }
+        },
+        [computeFn, log]
     );
 
     const notifyChange = useCallback(() => {
-        const newState = Date.now();
-        setState(newState);
-        isFunc(afterChange) && afterChange(newState, computedState.current);
-    }, [afterChange]);
+        log("notifyChange");
+        setState(Date.now());
+    }, [log, setState]);
 
     const setComputedState = useCallback(
         newComputedState => {
-            const prevComputedState = computedState.current;
+            log("setComputedState:", { newComputedState });
             computedState.current = newComputedState;
-            const newState = Date.now();
-            setState(prevState => {
-                callBeforeChange(prevState, prevComputedState);
-                return newState;
-            });
-            callAfterChange(newState, computedState.current);
+            if (timestampMode.current) setSimpleState(Date.now());
         },
-        [callBeforeChange, callAfterChange]
+        [log]
     );
 
-    useWhatChanged([state, beforeChange, afterChange]);
-
     return {
-        state,
+        state: simpleState,
         computedState: computedState.current,
         setState,
         setComputedState,
