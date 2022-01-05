@@ -24,14 +24,12 @@ const {
     } = useComputedState({
     initialState = Date.now(),
     initialComputedState,
-    computeFn,
-    beforeChange,
-    afterChange
+    computeFn
 })
 ```
 
 If all you pass to the hook is `initialComputedState`, `state` becomes a simple timestamp versioning that data.
-Of course you can pass `initialState` instead, and the hook will call your `computeFn` callback to compute or derive your `computedState` whenever you call `setState`. If all you want is to notify the hook that something in your `computedState` changed, just call `notifyChange`, or you can specify how to change the `computedState` using `setComputedState`. For convenience, you can also hook in callbacks `beforeChange` and `afterChange` if required.
+Of course you can pass `initialState` instead, and the hook will call your `computeFn` callback to compute or derive your `computedState` whenever you call `setState`. If all you want is to notify the hook that something in your `computedState` changed, just call `notifyChange`, or you can specify how to change the `computedState` using `setComputedState`.
 
 ### Try It
 
