@@ -1,6 +1,6 @@
 {
     "name": "@jfdi/use-computed-state",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "author": {
         "name": "Jon Silver",
         "email": "js@jfdi.info",
@@ -9,6 +9,9 @@
     "module": "dist/use-computed-state.esm.js",
     "typings": "dist/index.d.ts",
     "license": "MIT",
+    "files": [
+        "dist"
+    ],
     "dependencies": {
         "@jfdi/attempt": "^1.0.4",
         "@sindresorhus/is": "^4.2.0",
