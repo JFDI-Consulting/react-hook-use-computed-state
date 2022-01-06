@@ -8,10 +8,6 @@
     },
     "module": "dist/use-computed-state.esm.js",
     "typings": "dist/index.d.ts",
-    "files": [
-        "dist",
-        "example"
-    ],
     "license": "MIT",
     "dependencies": {
         "@jfdi/attempt": "^1.0.4",
