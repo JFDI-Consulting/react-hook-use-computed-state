@@ -10,7 +10,7 @@
     "typings": "dist/index.d.ts",
     "files": [
         "dist",
-        "example"
+        "example/src"
     ],
     "license": "MIT",
     "dependencies": {
