@@ -1,15 +1,16 @@
 {
     "name": "@jfdi/use-computed-state",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "author": {
         "name": "Jon Silver",
         "email": "js@jfdi.info",
         "url": "https://jfdi.info"
     },
-    "module": "dist/formulationist-core.esm.js",
+    "module": "dist/use-computed-state.esm.js",
     "typings": "dist/index.d.ts",
     "files": [
-        "dist"
+        "dist",
+        "example"
     ],
     "license": "MIT",
     "dependencies": {
